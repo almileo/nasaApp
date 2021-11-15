@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NasaAPP</title>
+</head>
+<body class="container">
+  <div>
+    <h2 class="text-center">Choose a Rover</h2>
+    <button class="btn btn-primary mx-3" (click)="getPhotosByRover('curiosity', 5)">Curiosity</button>
+    <button class="btn btn-primary mx-3" (click)="getPhotosByRover('opportunity', 1)">Opportunity</button>
+    <button class="btn btn-primary mx-3" (click)="getPhotosByRover('spirit', 1)">Spirit</button>
+  </div>
+  <div>
+    <h2 class="text-center">Choose a camera</h2>
+    <button class="btn btn-primary mx-3" (click)="getPhotosByCamera(rover, 'FHAZ')" *ngIf="roverSelected">Front Hazard Avoidance Camera</button>
+    <button class="btn btn-primary mx-3" (click)="getPhotosByCamera(rover, 'RHAZ')" *ngIf="roverSelected">Rear Hazard Avoidance Camera</button>
+    <button class="btn btn-primary mx-3" (click)="getPhotosByCamera(rover, 'MAST')" *ngIf="roverCuriosity">Mast Camera</button>
+    <button class="btn btn-primary mx-3" (click)="getPhotosByCamera(rover, 'CHEMCAM')" *ngIf="roverCuriosity">Chemistry and Camera Complex</button>
+    <button class="btn btn-primary mx-3" (click)="getPhotosByCamera(rover, 'MAHLI')" *ngIf="roverCuriosity">Mars Hand Lens Imager</button>
+    <button class="btn btn-primary mx-3 mt-2" (click)="getPhotosByCamera(rover, 'MARDI')" *ngIf="roverCuriosity">Mars Descent Imager</button>
+    <button class="btn btn-primary mx-3 mt-2" (click)="getPhotosByCamera(rover, 'NAVCAM')" *ngIf="roverSelected">Navigation Camera</button>
+    <button class="btn btn-primary mx-3 mt-2" (click)="getPhotosByCamera(rover, 'PANCAM')" *ngIf="roverOpportunity || roverSpirit">Panoramic Camera</button>
+    <button class="btn btn-primary mx-3 mt-2" (click)="getPhotosByCamera(rover, 'MINITES')" *ngIf="roverOpportunity || roverSpirit">Miniature Thermal Emission Spectrometer (Mini-TES)</button>
+  </div>
+  <div class="row">
+    <div class="img_container">
+      <div *ngFor="let url of img" class="image">
+        <img src="{{url}}" alt="">
+      </div>
+    </div>
+    
+    
+  </div>
+  
+  
+  <nav>
+    <ul class="pagination">
+      <li class="page-item"><a class="page-link" href="#" (click)="getPhotosByRover(rover, 1)">1</a></li>
+      <li class="page-item"><a class="page-link" href="#" (click)="getPhotosByRover(rover, 2)">2</a></li>
+      <li class="page-item"><a class="page-link" href="#" (click)="getPhotosByRover(rover, 3)">3</a></li>
+    </ul>
+  </nav>
+
+</body>
+</html>
