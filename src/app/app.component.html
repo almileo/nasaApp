@@ -7,42 +7,73 @@
   <title>NasaAPP</title>
 </head>
 <body class="container">
-  <div>
-    <h2 class="text-center">Choose a Rover</h2>
-    <button class="btn btn-primary mx-3" (click)="getPhotosByRover('curiosity', 5)">Curiosity</button>
-    <button class="btn btn-primary mx-3" (click)="getPhotosByRover('opportunity', 1)">Opportunity</button>
-    <button class="btn btn-primary mx-3" (click)="getPhotosByRover('spirit', 1)">Spirit</button>
+  <h1 class="text-center">Mars Rover's photos</h1>
+  
+  <h2 class="text-center mt-5">Choose a Rover</h2>
+  <div class="row">
+    <div class="d-grid gap-2 col-6 mx-auto">
+      <button class="btn btn-primary mx-3 mt-2" (click)="getPhotosByRover('curiosity', 5)">Curiosity</button>
+      <button class="btn btn-primary mx-3 mt-2" (click)="getPhotosByRover('opportunity', 1)">Opportunity</button>
+      <button class="btn btn-primary mx-3 mt-2" (click)="getPhotosByRover('spirit', 1)">Spirit</button>
+    </div>
   </div>
-  <div>
-    <h2 class="text-center">Choose a camera</h2>
-    <button class="btn btn-primary mx-3" (click)="getPhotosByCamera(rover, 'FHAZ')" *ngIf="roverSelected">Front Hazard Avoidance Camera</button>
-    <button class="btn btn-primary mx-3" (click)="getPhotosByCamera(rover, 'RHAZ')" *ngIf="roverSelected">Rear Hazard Avoidance Camera</button>
-    <button class="btn btn-primary mx-3" (click)="getPhotosByCamera(rover, 'MAST')" *ngIf="roverCuriosity">Mast Camera</button>
-    <button class="btn btn-primary mx-3" (click)="getPhotosByCamera(rover, 'CHEMCAM')" *ngIf="roverCuriosity">Chemistry and Camera Complex</button>
-    <button class="btn btn-primary mx-3" (click)="getPhotosByCamera(rover, 'MAHLI')" *ngIf="roverCuriosity">Mars Hand Lens Imager</button>
-    <button class="btn btn-primary mx-3 mt-2" (click)="getPhotosByCamera(rover, 'MARDI')" *ngIf="roverCuriosity">Mars Descent Imager</button>
-    <button class="btn btn-primary mx-3 mt-2" (click)="getPhotosByCamera(rover, 'NAVCAM')" *ngIf="roverSelected">Navigation Camera</button>
-    <button class="btn btn-primary mx-3 mt-2" (click)="getPhotosByCamera(rover, 'PANCAM')" *ngIf="roverOpportunity || roverSpirit">Panoramic Camera</button>
-    <button class="btn btn-primary mx-3 mt-2" (click)="getPhotosByCamera(rover, 'MINITES')" *ngIf="roverOpportunity || roverSpirit">Miniature Thermal Emission Spectrometer (Mini-TES)</button>
+
+  <div class="row mt-5">
+    <div class="col-6">
+      <label for="sol" class="form-label">Sol</label>
+      <input type="text" placeholder="Type the 'SOL' you want to search" class="form-control" id="sol" (keyup)="solSearch($event)">
+      <button class="btn btn-primary mt-3" (click)="searchBySol()">Search</button>
+    </div>
+    <div class="col-6">
+      <label for="earthDate" class="form-label">Earth Date</label>
+      
+      <form class="form-inline">
+        <div class="form-group">
+          <div class="input-group">
+            <input class="form-control" placeholder="Select an Earth Date to search photo"
+                   name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" (dateSelect)="earthDateSearch($event)">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+              <i class="bi bi-calendar"></i>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <button class="btn btn-primary mt-3" (click)="searchByEarthDate()">Search</button>
+    </div>
+  </div>
+
+  <h2 class="text-center mt-5">Choose a camera</h2>
+  <p class="text-center" *ngIf="!roverSelected">Fisrt you have to select a rover</p>
+  <div class="row">
+    <div class="d-flex col-4">
+      <button class="btn btn-primary mx-3 mt-2" (click)="getPhotosByCamera(rover, 'FHAZ')" *ngIf="roverSelected">Front Hazard Avoidance Camera</button>
+      <button class="btn btn-primary mx-3 mt-2" (click)="getPhotosByCamera(rover, 'RHAZ')" *ngIf="roverSelected">Rear Hazard Avoidance Camera</button>
+      <button class="btn btn-primary mx-3 mt-2" (click)="getPhotosByCamera(rover, 'MAST')" *ngIf="roverCuriosity">Mast Camera</button>
+    </div>
+    <div class="d-flex col-4">
+      <button class="btn btn-primary mx-3 mt-2" (click)="getPhotosByCamera(rover, 'CHEMCAM')" *ngIf="roverCuriosity">Chemistry and Camera Complex</button>
+      <button class="btn btn-primary mx-3 mt-2" (click)="getPhotosByCamera(rover, 'MAHLI')" *ngIf="roverCuriosity">Mars Hand Lens Imager</button>
+      <button class="btn btn-primary mx-3 mt-2" (click)="getPhotosByCamera(rover, 'MARDI')" *ngIf="roverCuriosity">Mars Descent Imager</button>
+    </div>
+    <div class="d-flex col-4">
+      <button class="btn btn-primary mx-3 mt-2" (click)="getPhotosByCamera(rover, 'NAVCAM')" *ngIf="roverSelected">Navigation Camera</button>
+      <button class="btn btn-primary mx-3 mt-2" (click)="getPhotosByCamera(rover, 'PANCAM')" *ngIf="roverOpportunity || roverSpirit">Panoramic Camera</button>
+      <button class="btn btn-primary mx-3 mt-2" (click)="getPhotosByCamera(rover, 'MINITES')" *ngIf="roverOpportunity || roverSpirit">Miniature Thermal Emission Spectrometer (Mini-TES)</button>
+    </div>
   </div>
   <div class="row">
-    <div class="img_container">
-      <div *ngFor="let url of img" class="image">
-        <img src="{{url}}" alt="">
+    <div class="img-container">
+      <div *ngFor="let photo of photos | paginate: { id: 'photosPagination', itemsPerPage: 25, currentPage: currentPage, totalItems: totalPhotos }" class="image">
+        <img [src]="photo.img_src" alt="photo.rover.name">
       </div>
-    </div>
-    
-    
+    </div>    
   </div>
-  
-  
-  <nav>
-    <ul class="pagination">
-      <li class="page-item"><a class="page-link" href="#" (click)="getPhotosByRover(rover, 1)">1</a></li>
-      <li class="page-item"><a class="page-link" href="#" (click)="getPhotosByRover(rover, 2)">2</a></li>
-      <li class="page-item"><a class="page-link" href="#" (click)="getPhotosByRover(rover, 3)">3</a></li>
-    </ul>
-  </nav>
+
+  <div class="pagination">
+    <pagination-controls id="photosPagination" maxSize="5" directionLinks="true" (pageChange)="currentPage = $event"></pagination-controls>
+  </div>
 
 </body>
 </html>

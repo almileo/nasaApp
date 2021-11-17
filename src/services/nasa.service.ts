@@ -7,35 +7,32 @@ import { Observable } from 'rxjs';
 })
 export class NasaService {
 
-  private apiUrl: string = 'https://api.nasa.gov/mars-photos/api/v1/rovers';
-  private apiKey: string = '&api_key=DEMO_KEY';
+  private API_URL: string = 'https://api.nasa.gov/mars-photos/api/v1/rovers';
+  private API_KEY: string = 'rBFKUkzoynZF9kY93SVON7Bxlo6EQDTUy8opRi2D';
+  // private API_KEY: string = 'DEMO_KEY';
 
 
   constructor(
     private http: HttpClient
   ) { }
 
-  public getPhotos(page: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/curiosity/photos?sol=1000&page=${page}${this.apiKey}`);
+  public getPhotosBySol(rover: string, sol: string): Observable<any> {
+    return this.http.get<any>(`${this.API_URL}/${rover}/photos?sol=${sol}&api_key=${this.API_KEY}`);
   }
 
-  public getPhotosHeroku(): Observable<any> {
-    return this.http.get('https://mars-photos.herokuapp.com/api/v1/rovers/curiosity/photos?api_key=DEMO_KEY&sol=1000');
+  public getLatestPhotosByRover(rover: string): Observable<any> {
+    return this.http.get<any>(`${this.API_URL}/${rover}/latest_photos?&api_key=${this.API_KEY}`);
   }
 
-  public getPhotosHerokuByRover(rover, page): Observable<any> {
-    return this.http.get(`https://mars-photos.herokuapp.com/api/v1/${rover}/curiosity/photos?api_key=DEMO_KEY&sol=1000`);
-  }
-
-  public  getPhotosByRover(rover: string, page: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${rover}/photos?sol=1000&page=${page}${this.apiKey}`);
+  public  getPhotosByRover(rover: string): Observable<any> {
+    return this.http.get<any>(`${this.API_URL}/${rover}/photos&api_key=${this.API_KEY}`);
   }
 
   public  getPhotosByCamera(rover: string, camera: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${rover}/photos?sol=1000&camera=${camera}${this.apiKey}`);
+    return this.http.get<any>(`${this.API_URL}/${rover}/photos?camera=${camera}&api_key=${this.API_KEY}`);
   }
 
-  public  getPhotosByEarthDate(rover: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${rover}/photos?sol=1000${this.apiKey}`);
+  public  getPhotosByEarthDate(rover: string, earthDate: string): Observable<any> {
+    return this.http.get<any>(`${this.API_URL}/${rover}/photos?earth_date=${earthDate}&api_key=${this.API_KEY}`);
   }
 }
