@@ -39,15 +39,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(){
-    // this.nasaService.getLatestPhotos().subscribe((data) => {
-    //   this.photos = [];  
-    //   console.log('photos resp- ', data) 
-    //   this.photos = data.latest_photos
-    //   console.log('this.photos: ', this.photos);
-    // }, (httpErrorResponse: HttpErrorResponse) => {
-    //   console.log(httpErrorResponse);
-    //   alert('There is an error with the request ' + httpErrorResponse.statusText + ' please try again later');      
-    // });
   }
 
   public getPhotosByRover(rover: string, page: number) {
@@ -58,12 +49,10 @@ export class AppComponent implements OnInit {
     this.nasaService.getLatestPhotosByRover(rover).subscribe((data) => {
       this.photos = [];   
       this.photos = data.latest_photos; 
-      console.log('this.photos-ROVER: ', this.photos);
       this.rover = rover;
       this.roverSelected = true;
       this.totalPhotos = data.latest_photos.lenght;
     }, (httpErrorResponse: HttpErrorResponse) => {
-      console.log(httpErrorResponse);
       alert('There is an error with the request ' + httpErrorResponse.statusText + ' please try again later');      
     })
     if(rover === 'curiosity') {
@@ -82,7 +71,6 @@ export class AppComponent implements OnInit {
       Object.values(photos).forEach((p) => {
         this.photos.push(p);
       })
-      console.log('this.photos-CAMERA: ', this.photos);
       this.photos.forEach((photo) => {
         console.log(photo);
         photo.forEach(element => {
@@ -105,26 +93,20 @@ export class AppComponent implements OnInit {
     this.nasaService.getPhotosBySol(this.rover, this.sol).subscribe((data) => {
       this.photos = [];
       this.photos = data.photos;
-      console.log('photos - searchBySol: ', this.photos);
       
     }, (httpErrorResponse: HttpErrorResponse) => {
-      console.log(httpErrorResponse);
       alert('There is an error with the request ' + httpErrorResponse.statusText + ' please try again later');      
-    })
-    
+    }) 
   }
 
   public searchByEarthDate() {
     this.nasaService.getPhotosByEarthDate(this.rover, this.earthDate).subscribe((data) => {
       this.photos = [];
       this.photos = data.photos;
-      console.log('photos - searchByEarthDate: ', this.photos);
       
     }, (httpErrorResponse: HttpErrorResponse) => {
-      console.log(httpErrorResponse);
       alert('There is an error with the request ' + httpErrorResponse.statusText + ' please try again later');      
     })
-    
   }
 
 }

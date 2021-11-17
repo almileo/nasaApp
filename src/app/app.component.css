@@ -1,17 +1,8 @@
 img {
-    width: 500px;
-    height: 400px;
-    margin-right: 25px;
-}
-
-.img-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-content: space-around;
-    margin-top: 25px;
-    width: 100vw;
-    white-space: pre-wrap;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    margin-right: 10px;
 }
 
 .pagination {
