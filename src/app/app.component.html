@@ -48,23 +48,23 @@
   <p class="text-center" *ngIf="!roverSelected">Fisrt you have to select a rover</p>
   <div class="row">
     <div class="col-4">
-      <button class="btn btn-primary mx-3 mt-2" (click)="getPhotosByCamera(rover, 'FHAZ')" *ngIf="roverSelected">Front Hazard Avoidance Camera</button>
-      <button class="btn btn-primary mx-3 mt-2" (click)="getPhotosByCamera(rover, 'RHAZ')" *ngIf="roverSelected">Rear Hazard Avoidance Camera</button>
-      <button class="btn btn-primary mx-3 mt-2" (click)="getPhotosByCamera(rover, 'MAST')" *ngIf="roverCuriosity">Mast Camera</button>
+      <button class="btn btn-primary mx-1 mt-2" (click)="getPhotosByCamera(rover, 'FHAZ')" *ngIf="roverSelected">Front Hazard Avoidance Camera</button>
+      <button class="btn btn-primary mx-1 mt-2" (click)="getPhotosByCamera(rover, 'RHAZ')" *ngIf="roverSelected">Rear Hazard Avoidance Camera</button>
+      <button class="btn btn-primary mx-1 mt-2" (click)="getPhotosByCamera(rover, 'MAST')" *ngIf="roverCuriosity">Mast Camera</button>
     </div>
     <div class="col-4">
-      <button class="btn btn-primary mx-3 mt-2" (click)="getPhotosByCamera(rover, 'CHEMCAM')" *ngIf="roverCuriosity">Chemistry and Camera Complex</button>
-      <button class="btn btn-primary mx-3 mt-2" (click)="getPhotosByCamera(rover, 'MAHLI')" *ngIf="roverCuriosity">Mars Hand Lens Imager</button>
-      <button class="btn btn-primary mx-3 mt-2" (click)="getPhotosByCamera(rover, 'MARDI')" *ngIf="roverCuriosity">Mars Descent Imager</button>
+      <button class="btn btn-primary mt-2" (click)="getPhotosByCamera(rover, 'CHEMCAM')" *ngIf="roverCuriosity">Chemistry and Camera Complex</button>
+      <button class="btn btn-primary mt-2" (click)="getPhotosByCamera(rover, 'MAHLI')" *ngIf="roverCuriosity">Mars Hand Lens Imager</button>
+      <button class="btn btn-primary mt-2" (click)="getPhotosByCamera(rover, 'MARDI')" *ngIf="roverCuriosity">Mars Descent Imager</button>
     </div>
     <div class="col-4">
-      <button class="btn btn-primary mx-3 mt-2" (click)="getPhotosByCamera(rover, 'NAVCAM')" *ngIf="roverSelected">Navigation Camera</button>
-      <button class="btn btn-primary mx-3 mt-2" (click)="getPhotosByCamera(rover, 'PANCAM')" *ngIf="roverOpportunity || roverSpirit">Panoramic Camera</button>
-      <button class="btn btn-primary mx-3 mt-2" (click)="getPhotosByCamera(rover, 'MINITES')" *ngIf="roverOpportunity || roverSpirit">Miniature Thermal Emission Spectrometer (Mini-TES)</button>
+      <button class="btn btn-primary mt-2" (click)="getPhotosByCamera(rover, 'NAVCAM')" *ngIf="roverSelected">Navigation Camera</button>
+      <button class="btn btn-primary mt-2" (click)="getPhotosByCamera(rover, 'PANCAM')" *ngIf="roverOpportunity || roverSpirit">Panoramic Camera</button>
+      <button class="btn btn-primary mt-2" (click)="getPhotosByCamera(rover, 'MINITES')" *ngIf="roverOpportunity || roverSpirit">Miniature Thermal Emission Spectrometer (Mini-TES)</button>
     </div>
   </div>
   <div class="row mt-4">
-      <div *ngFor="let photo of photos | paginate: { id: 'photosPagination', itemsPerPage: 25, currentPage: currentPage, totalItems: totalPhotos }" class="col-3">
+      <div *ngFor="let photo of photos | paginate: { id: 'photosPagination', itemsPerPage: 25, currentPage: currentPage, totalItems: totalPhotos }" class="col-sm-6 col-md-3">
         <img [src]="photo.img_src" alt="photo.rover.name">
       </div>
   </div>
