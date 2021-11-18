@@ -22,7 +22,7 @@
     <div class="col-6">
       <label for="sol" class="form-label">Sol</label>
       <input type="text" placeholder="Type the 'SOL' you want to search" class="form-control" id="sol" (keyup)="solSearch($event)">
-      <button class="btn btn-primary mt-3" (click)="searchBySol()">Search</button>
+      <button class="btn btn-primary mt-3" (click)="searchBySol()"  [disabled]="!roverSelected">Search</button>
     </div>
     <div class="col-6">
       <label for="earthDate" class="form-label">Earth Date</label>
@@ -40,7 +40,7 @@
         </div>
       </form>
 
-      <button class="btn btn-primary mt-3" (click)="searchByEarthDate()">Search</button>
+      <button class="btn btn-primary mt-3" (click)="searchByEarthDate()"  [disabled]="!roverSelected">Search</button>
     </div>
   </div>
 
