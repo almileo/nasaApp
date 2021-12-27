@@ -28,8 +28,8 @@ export class NasaService {
     return this.http.get<any>(`${this.API_URL}/${rover}/photos&api_key=${this.API_KEY}`);
   }
 
-  public  getPhotosByCamera(rover: string, camera: string): Observable<any> {
-    return this.http.get<any>(`${this.API_URL}/${rover}/photos?camera=${camera}&api_key=${this.API_KEY}`);
+  public  getPhotosByCamera(rover: string, camera: string, earth_date: string): Observable<any> {
+    return this.http.get<any>(`${this.API_URL}/${rover}/photos?camera=${camera}&earth_date=${earth_date}&api_key=${this.API_KEY}`);
   }
 
   public  getPhotosByEarthDate(rover: string, earthDate: string): Observable<any> {

@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
   public camera: string = null;
   public sol: string = null;
   public earthDate: string = null;
+  public earth_date: string = '2021-11-15';
 
   model: NgbDateStruct;
 
@@ -39,6 +40,10 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(){
+    // this.nasaService.getPhotosByCamera('curiosity', 'fhaz', '2021-11-15').subscribe((data) => {
+    //   console.log('data: ', data);
+      
+    // })
   }
 
   public getPhotosByRover(rover: string, page: number) {
@@ -52,6 +57,10 @@ export class AppComponent implements OnInit {
       this.rover = rover;
       this.roverSelected = true;
       this.totalPhotos = data.latest_photos.lenght;
+      console.log('photos-rover: ', this.photos);
+      console.log('this.rover: ', this.rover);
+      
+      
     }, (httpErrorResponse: HttpErrorResponse) => {
       alert('There is an error with the request ' + httpErrorResponse.statusText + ' please try again later');      
     })
@@ -64,19 +73,19 @@ export class AppComponent implements OnInit {
     }    
   }
 
-  public getPhotosByCamera(rover: string, camera: string) {
-    this.nasaService.getPhotosByCamera(rover, camera).subscribe((photos) => {
+  public getPhotosByCamera(rover: string, camera: string, earth_date: string) {
+    console.log('rover: ', rover);
+    console.log('camera: ', camera);
+    
+    
+    this.nasaService.getPhotosByCamera(rover, camera, earth_date).subscribe((data) => {
+      console.log('data: ', data);
+      
       this.photos = [];   
       this.img = [];   
-      Object.values(photos).forEach((p) => {
-        this.photos.push(p);
-      })
-      this.photos.forEach((photo) => {
-        console.log(photo);
-        photo.forEach(element => {
-          this.img.push(element.img_src);
-        });
-      });
+      this.photos = data.photos;
+      console.log('photos -camera: ', this.photos);
+      
     })
     this.camera = camera;
   }

@@ -48,9 +48,9 @@
   <p class="text-center" *ngIf="!roverSelected">Fisrt you have to select a rover</p>
   <div class="row">
     <div class="col-4">
-      <button class="btn btn-primary mx-1 mt-2" (click)="getPhotosByCamera(rover, 'FHAZ')" *ngIf="roverSelected">Front Hazard Avoidance Camera</button>
-      <button class="btn btn-primary mx-1 mt-2" (click)="getPhotosByCamera(rover, 'RHAZ')" *ngIf="roverSelected">Rear Hazard Avoidance Camera</button>
-      <button class="btn btn-primary mx-1 mt-2" (click)="getPhotosByCamera(rover, 'MAST')" *ngIf="roverCuriosity">Mast Camera</button>
+      <button class="btn btn-primary mt-2" (click)="getPhotosByCamera(rover, 'FHAZ', earth_date)" *ngIf="roverSelected">Front Hazard Avoidance Camera</button>
+      <button class="btn btn-primary mt-2" (click)="getPhotosByCamera(rover, 'RHAZ')" *ngIf="roverSelected">Rear Hazard Avoidance Camera</button>
+      <button class="btn btn-primary mt-2" (click)="getPhotosByCamera(rover, 'MAST')" *ngIf="roverCuriosity">Mast Camera</button>
     </div>
     <div class="col-4">
       <button class="btn btn-primary mt-2" (click)="getPhotosByCamera(rover, 'CHEMCAM')" *ngIf="roverCuriosity">Chemistry and Camera Complex</button>
